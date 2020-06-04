@@ -7,8 +7,8 @@
     <div class="cards">
       <div 
         class="card" 
-        v-for="card in cards" 
-        :key="card.name" 
+        v-for="(card, i) in cards" 
+        :key="i" 
         :class="{ flipped: card.flipped, found: card.found }" 
         @click="flipCard(card)">
         <div class="back"></div>
@@ -43,16 +43,19 @@ let shuffleCards = () => {
 	return _.shuffle(cards);
 }
 export default {
-  data: {
-		showSplash: false,
-		cards: [],
-		started: false,
-		startTime: 0,
-		turns: 0,
-		flipBackTimer: null,
-		timer: null,
-		time: "--:--",
-		score: 0
+  data() {
+    return {
+      showSplash: false,
+      cards: [],
+      started: false,
+      startTime: 0,
+      turns: 0,
+      flipBackTimer: null,
+      timer: null,
+      time: "--:--",
+      score: 0
+    }
+		
 	},
 	
 	methods: {
