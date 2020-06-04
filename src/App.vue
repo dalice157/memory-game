@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="info">
-      <div><span class="label">Time:</span><span class="value">{{ time }} </span></div>
+      <div><span class="label">Score:</span><span class="value">{{ score }} </span></div>
       <div><span class="label">Turns:</span><span class="value">{{ turns }} </span></div>
     </div>
     <div class="cards">
@@ -66,7 +66,6 @@ export default {
       time: "--:--",
       score: 0
     }
-		
 	},
 	
 	methods: {
@@ -87,11 +86,10 @@ export default {
 		},
 		
 		flippedCards() {
-			console.log('filter:', _.filter(this.cards, card => card.flipped))
 			return _.filter(this.cards, card => card.flipped);
 		},
 		
-		sameFlippedCard() {
+		sameFlippedCard() { // 翻開是一樣的
 			let flippedCards = this.flippedCards();
 			if (flippedCards.length == 2) {
 				if (flippedCards[0].name == flippedCards[1].name)
@@ -140,10 +138,8 @@ export default {
 			
 			if (flipCount == 0) {
 				card.flipped = !card.flipped;
-        console.log('0:', card.flipped)
 			} else if (flipCount == 1) {
 				card.flipped = !card.flipped;
-        console.log('1:', card.flipped)
 				this.turns += 1;
 
 				if (this.sameFlippedCard()) {
@@ -155,11 +151,9 @@ export default {
 
 						if (this.checkAllFound()) {
 							this.finishGame();
-						}	
-
+						}
 					}, 200);
-				}
-				else {
+				} else {
 					// Wrong match
 					this.flipBackTimer = setTimeout( ()=> {
 						this.clearFlipBackTimer();
@@ -246,8 +240,8 @@ html {
 	.card {
 		position: relative;
 		display: inline-block;
-		width: 100px;
-		height: 150px;
+		width: 200px;
+		height: 300px;
 		margin: 1em 2em;
 
 		transition: opacity .5s;
@@ -268,7 +262,7 @@ html {
 		
 		
 		.back {
-			background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/102308/card_backside.jpg');
+			background-image: url('https://p2.bahamut.com.tw/B/2KU/46/0000377946.JPG');
 			background-size: 90%;
 			background-position: center;
 			background-repeat: no-repeat;
