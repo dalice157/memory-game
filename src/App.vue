@@ -1,9 +1,6 @@
 <template>
-  <div id="app">
-    <div class="info">
-      <div><span class="label">Score:</span><span class="value">{{ score }} </span></div>
-      <div><span class="label">Turns:</span><span class="value">{{ turns }} </span></div>
-    </div>
+  <div id="app" class="wrap">
+    <Header :score="score" :turns="turns" />
     <div class="cards">
       <div 
         class="card" 
@@ -29,6 +26,7 @@
 <script>
 import _ from 'lodash';
 import moment from 'moment';
+import Header from './components/header';
 import vue from './assets/img/vue.png';
 import express from './assets/img/express.png';
 import mongo from './assets/img/mongodb.png';
@@ -54,6 +52,10 @@ let shuffleCards = () => {
 	return _.shuffle(cards);
 }
 export default {
+  name: 'App',
+  components: {
+    Header
+  },
   data() {
     return {
       showSplash: false,
@@ -213,35 +215,20 @@ html {
   }
 }
 
-#app {
+.wrap {
 	margin: 2em;
 }
 
-.info {
-	text-align: center;
-	padding-bottom: 1em;
-	border-bottom: 1px solid #555;
-	
-	> div {
-		display: inline-block;
-		width: 200px;
-		
-		.label {
-			margin-right: 5px;
-		}
-		
-		.value {
-			font-weight: bold;
-		}
-	}
-}
+
 
 .cards {
+  width: 1300px;
+  margin: 0 auto;
 	.card {
 		position: relative;
 		display: inline-block;
-		width: 200px;
-		height: 300px;
+		width: 150px;
+		height: 220px;
 		margin: 1em 2em;
 
 		transition: opacity .5s;
