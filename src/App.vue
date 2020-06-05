@@ -94,8 +94,10 @@ export default {
 		sameFlippedCard() { // 翻開是一樣的
 			let flippedCards = this.flippedCards();
 			if (flippedCards.length == 2) {
-				if (flippedCards[0].name == flippedCards[1].name)
+				if (flippedCards[0].name == flippedCards[1].name){
+          this.score = this.score + 1;
 					return true;
+        }
 			}
 		},
 		
