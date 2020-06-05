@@ -1,26 +1,28 @@
 <template>
   <div id="app" class="wrap">
-    <Header :scoreA="scoreA" :scoreB="scoreB" :resetGame="resetGame" />
-    <div class="cards">
-      <div 
-        class="card" 
-        v-for="(card, i) in cards" 
-        :key="i" 
-        :class="{ flipped: card.flipped, found: card.found }" 
-        @click="flipCard(card)">
-        <div class="back"></div>
-        <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>
-      </div>
-    </div>
-    <Lightbox :user="user" :closeBox="closeBox" v-if="show" />
+    <Header 
+      :scoreA="scoreA" 
+      :scoreB="scoreB" 
+      :resetGame="resetGame" 
+    />
+    <Card 
+      :cards="cards"
+      :flipCard="flipCard"
+    />
+    <Lightbox 
+      :user="user" 
+      :closeBox="closeBox" 
+      v-if="show" 
+    />
   </div>
 </template>
 
 <script>
 import _ from 'lodash';
 import Header from './components/header';
+import Card from './components/card';
 import Lightbox from './components/lightbox';
-import vue from './assets/img/vue.png';
+// import vue from './assets/img/vue.png';
 import express from './assets/img/express.png';
 import mongo from './assets/img/mongodb.png';
 import webpack from './assets/img/webpack.png';
@@ -31,6 +33,7 @@ import nodejs from './assets/img/nodejs.png';
 import switchGame from './assets/img/switchGame.png';
 import psGame from './assets/img/psGame.png';
 import pubg from './assets/img/pubg.jpg';
+const vue = require(`./assets/img/vue.png`);
 
 let CardTypes = [
 	{ name: "vue", image: vue },
@@ -45,26 +48,24 @@ let CardTypes = [
   { name: "psGame", image: psGame },
   { name: "pubg", image: pubg },
 ];
+
 let shuffleCards = () => { //亂數排序
 	let cards = [].concat(_.cloneDeep(CardTypes), _.cloneDeep(CardTypes));
 	return _.shuffle(cards);
 }
+
 export default {
   name: 'App',
   components: {
     Header,
-    Lightbox
+    Lightbox,
+    Card
   },
   data() {
     return {
       show: false,
       cards: [],
-      started: false,
-      startTime: 0,
-      turns: 0,
       flipBackTimer: null,
-      timer: null,
-      time: "--:--",
       scoreA: 0,
       scoreB: 0,
       user: 'A'
@@ -75,12 +76,9 @@ export default {
 		resetGame() {
 			this.show = false;
 			let cards = shuffleCards();
-			this.turns = 0;
 			this.scoreA = 0;
       this.scoreB = 0;
       this.user = 'A';
-			this.started = false;
-			this.startTime = 0;
 			
 			_.each(cards, (card) => {
 				card.flipped = false;
@@ -90,26 +88,24 @@ export default {
 			this.cards = cards;
 		},
 		
-		flippedCards() {
+		flippedCards() { // 將有翻轉的過濾出來
 			return _.filter(this.cards, card => card.flipped);
 		},
 		
-		sameFlippedCard() { // 翻開是一樣的
+		sameFlippedCard() { // 翻開後
 			let flippedCards = this.flippedCards();
-			if (flippedCards.length == 2) {
-				if (flippedCards[0].name == flippedCards[1].name){
-          switch (this.user) {
-            case 'A':
-              return this.scoreA = this.scoreA + 1;
-              break;
-            case 'B':
-              return this.scoreB = this.scoreB + 1;
-              break;
-            default:
-              break;
-          }
-					return true;
+			if (flippedCards.length == 2 && flippedCards[0].name == flippedCards[1].name) {
+        switch (this.user) {
+          case 'A':
+            return this.scoreA = this.scoreA + 1;
+            break;
+          case 'B':
+            return this.scoreB = this.scoreB + 1;
+            break;
+          default:
+            break;
         }
+        return true;
 			}
 		},
 		
@@ -139,10 +135,9 @@ export default {
 				card.flipped = !card.flipped;
 			} else if (flipCount == 1) {
 				card.flipped = !card.flipped;
-				this.turns += 1;
 
 				if (this.sameFlippedCard()) {
-					// Match!
+					// 猜中
 					this.flipBackTimer = setTimeout( ()=> {
 						this.clearFlipBackTimer();
 						this.setCardFounds();
@@ -153,7 +148,7 @@ export default {
 						}
 					}, 200);
 				} else {
-					// Wrong match
+					// 猜錯
 					this.flipBackTimer = setTimeout( ()=> {
             this.user = this.user === 'A' ? 'B' : 'A';
             this.show = true;
@@ -167,8 +162,7 @@ export default {
 		clearFlips() {
 			_.map(this.cards, card => card.flipped = false);
 		},
-		
-		
+	
 		clearFlipBackTimer() {
 			clearTimeout(this.flipBackTimer);
 			this.flipBackTimer = null;
@@ -198,67 +192,5 @@ html {
 	font-weight: 400;
 	font-smoothing: antialiased;
 }
-
-.cards {
-  width: 1080px;
-  margin: 0 auto;
-	.card {
-		position: relative;
-		display: inline-block;
-		width: 150px;
-		height: 220px;
-		margin: 1em 2em;
-
-		transition: opacity .5s;
-
-		.front, .back {
-			border-radius: 5px;
-			position: absolute;
-			left: 0; right: 0; top: 0; bottom: 0;
-			width: 100%;
-			height: 100%;
-			background-color: $white;
-			
-			backface-visibility: hidden;
-			transform: translateZ(0);
-			transition: transform 0.6s;
-			transform-style: preserve-3d;
-		}
-		
-		
-		.back {
-			background-image: url('https://p2.bahamut.com.tw/B/2KU/46/0000377946.JPG');
-			background-size: 95%;
-			background-position: center;
-			background-repeat: no-repeat;
-			
-			font-size: 12px;
-		}
-		
-		.front {
-			transform: rotateY(-180deg);
-			
-			background-size: 90%;
-			background-repeat: no-repeat;
-			background-position: center;
-		}
-		
-		&.flipped, &.found {
-			.back {
-				transform: rotateY(180deg);
-			}
-			
-			.front {
-				transform: rotateY(0deg);
-			}
-		}
-		
-		&.found {
-			opacity: 0.3;
-		}
-	}
-	
-}
-
 
 </style>

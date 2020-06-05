@@ -10,12 +10,20 @@
   align-items: center; 
   .label {
     font-size: 22px;
+    &:after {
+      content: '|';
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    &:last-child:after {
+        content: '';
+        padding: 0;
+      }
     .title {
       display: inline-block;
       font-weight: 700;
       margin-right: 4px;
     }
-    margin-right: 10px;
   }
   .value {
     color: $red;
@@ -24,6 +32,7 @@
 
 .btnWrap {
   margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 }
 

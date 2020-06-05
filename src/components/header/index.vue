@@ -1,17 +1,17 @@
 <template>
   <div class="wrap">
+    <div class="btnWrap">
+      <button class="btn" @click="resetGame()">重新開始</button>
+    </div>
     <div class="info">
       <div class="label">
-        <span class="title">Score-A：</span>
+        <span class="title">A組：</span>
         <span class="value">{{ scoreA }}</span>
       </div>
       <div class="label">
-        <span class="title">Score-B：</span>
+        <span class="title">B組：</span>
         <span class="value">{{ scoreB }}</span>
       </div>
-    </div>
-    <div class="btnWrap">
-      <button class="btn" @click="resetGame()">重新開始</button>
     </div>
   </div>
 </template>
