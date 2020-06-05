@@ -1,6 +1,3 @@
-const path = require('path')
-const debug = process.env.NODE_ENV !== 'production'
-
 module.exports = {
   // 基本路徑
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',

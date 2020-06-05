@@ -59,3 +59,27 @@
 		}
 	}
 }
+
+@media only screen and (min-width: 321px) and (max-width: 768px) {
+  .cards {
+    width: 100%;
+    text-align: center;
+    .card {
+      width: 93px;
+		  height: 140px;
+		  margin: 1em;
+    }
+  }
+} 
+
+@media only screen and (max-width: 321px) {
+  .cards {
+    width: 100%;
+    text-align: center;
+    .card {
+      width: 90px;
+		  height: 130px;
+		  margin: 1em .3em;
+    }
+  }
+}
