@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="wrap">
-    <Header :scoreA="scoreA" :scoreB="scoreB" />
+    <Header :scoreA="scoreA" :scoreB="scoreB" :resetGame="resetGame" />
     <div class="cards">
       <div 
         class="card" 
@@ -24,7 +24,6 @@
 
 <script>
 import _ from 'lodash';
-import moment from 'moment';
 import Header from './components/header';
 import vue from './assets/img/vue.png';
 import express from './assets/img/express.png';
@@ -135,11 +134,6 @@ export default {
       this.show = false;
     },
 		
-		finishGame() {
-			this.started = false;
-			this.show = true;
-		},
-		
 		flipCard(card) {
 			if (card.found || card.flipped) return;
 			
@@ -166,9 +160,9 @@ export default {
 					// Wrong match
 					this.flipBackTimer = setTimeout( ()=> {
             this.user = this.user === 'A' ? 'B' : 'A';
-			      this.show = true;
-						this.clearFlipBackTimer();
-						this.clearFlips();
+            this.show = true;
+            this.clearFlipBackTimer();
+            this.clearFlips();
 					}, 1000);
 				}
 			}
@@ -216,8 +210,8 @@ html {
 @mixin clearfix() {
   &:before,
   &:after {
-      content: "";
-      display: table;
+    content: "";
+    display: table;
   }
   &:after {
       clear: both;
@@ -296,7 +290,7 @@ html {
 	.overlay {
 		position: absolute;
 		left: 0; right: 0; top: 0; bottom: 0;
-		
+		height: 100%;
 		background-color: rgba(#000, 0.6);
 	}
 	

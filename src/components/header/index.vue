@@ -8,13 +8,14 @@
       <span class="title">ScoreB：</span>
       <span class="value">{{ scoreB }}</span>
     </div>
+    <button @click="resetGame()">重新開始</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
-  props: ['scoreA','scoreB']
+  props: ['scoreA','scoreB', 'resetGame']
 }
 </script>
 
