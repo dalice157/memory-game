@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="wrap">
-    <Header :scoreA="scoreA" :scoreB="scoreB" :turns="turns" />
+    <Header :scoreA="scoreA" :scoreB="scoreB" />
     <div class="cards">
       <div 
         class="card" 
@@ -12,12 +12,11 @@
         <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>
       </div>
     </div>
-    <div class="splash" v-if="showSplash">
+    <div class="box" v-if="show">
       <div class="overlay"></div>
       <div class="content">
-        <div class="title">You won!</div>
-        <div class="score">Score: {{ score }}</div>
-        <button class="newGame" @click="resetGame()">New game</button>
+        <div class="title">你猜錯了，換 {{user}} 猜。</div>
+        <button @click="closeBox()">關閉</button>
       </div>
     </div>
   </div>
@@ -63,7 +62,7 @@ export default {
   },
   data() {
     return {
-      showSplash: false,
+      show: false,
       cards: [],
       started: false,
       startTime: 0,
@@ -79,7 +78,7 @@ export default {
 	
 	methods: {
 		resetGame() {
-			this.showSplash = false;
+			this.show = false;
 			let cards = shuffleCards();
 			this.turns = 0;
 			this.scoreA = 0;
@@ -101,7 +100,6 @@ export default {
 		},
 		
 		sameFlippedCard() { // 翻開是一樣的
-    console.log('user', this.user)
 			let flippedCards = this.flippedCards();
 			if (flippedCards.length == 2) {
 				if (flippedCards[0].name == flippedCards[1].name){
@@ -132,10 +130,14 @@ export default {
 			if (foundCards.length == this.cards.length)
 				return true;
 		},
+
+    closeBox() {
+      this.show = false;
+    },
 		
 		finishGame() {
 			this.started = false;
-			this.showSplash = true;
+			this.show = true;
 		},
 		
 		flipCard(card) {
@@ -164,6 +166,7 @@ export default {
 					// Wrong match
 					this.flipBackTimer = setTimeout( ()=> {
             this.user = this.user === 'A' ? 'B' : 'A';
+			      this.show = true;
 						this.clearFlipBackTimer();
 						this.clearFlips();
 					}, 1000);
@@ -286,7 +289,7 @@ html {
 	
 } // .cards
 
-.splash {
+.box {
 	position: absolute;
 	left: 0; right: 0; top: 0; bottom: 0;
 	
