@@ -12,19 +12,14 @@
         <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>
       </div>
     </div>
-    <div class="box" v-if="show">
-      <div class="overlay"></div>
-      <div class="content">
-        <div class="title">你猜錯了，換 {{user}} 猜。</div>
-        <button @click="closeBox()">關閉</button>
-      </div>
-    </div>
+    <Lightbox :user="user" :closeBox="closeBox" v-if="show" />
   </div>
 </template>
 
 <script>
 import _ from 'lodash';
 import Header from './components/header';
+import Lightbox from './components/lightbox';
 import vue from './assets/img/vue.png';
 import express from './assets/img/express.png';
 import mongo from './assets/img/mongodb.png';
@@ -57,7 +52,8 @@ let shuffleCards = () => { //亂數排序
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    Lightbox
   },
   data() {
     return {
@@ -283,55 +279,5 @@ html {
 	
 } // .cards
 
-.box {
-	position: absolute;
-	left: 0; right: 0; top: 0; bottom: 0;
-	
-	.overlay {
-		position: absolute;
-		left: 0; right: 0; top: 0; bottom: 0;
-		height: 100%;
-		background-color: rgba(#000, 0.6);
-	}
-	
-	.content {
-		position: absolute;
-		left: 0; right: 0; top: 0; bottom: 0;
 
-		width: 400px;
-		height: 200px;
-		
-		margin: auto;
-		text-align: center;
-		
-		background-color: rgba(#333, 0.9);
-		
-		border-radius: 10px;
-		box-shadow: 5px 5px 20px rgba(Black, 0.8);
-		
-		padding: 1em;
-		
-		.title {
-			font-size: 1.8em;
-			padding: 0.5em;
-		}
-		
-		.score {
-			padding: 0.5em;
-		}
-		
-		button {
-			margin-top: 1.0em;
-			
-			background-color: #444;
-			padding: 5px 20px;
-			border-radius: 4px;
-			border: 1px solid #555;
-			color: $white;
-			
-			font-size: 1.4em;
-			
-		}
-	}
-}
 </style>
