@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="wrap">
-    <Header :score="score" :turns="turns" />
+    <Header :scoreA="scoreA" :scoreB="scoreB" :turns="turns" />
     <div class="cards">
       <div 
         class="card" 
@@ -32,10 +32,13 @@ import express from './assets/img/express.png';
 import mongo from './assets/img/mongodb.png';
 import webpack from './assets/img/webpack.png';
 import babel from './assets/img/babel.png';
-import jade from './assets/img/jade.png';
 import css from './assets/img/css.png';
 import html from './assets/img/html.png';
 import nodejs from './assets/img/nodejs.png';
+import switchGame from './assets/img/switchGame.png';
+import psGame from './assets/img/psGame.png';
+import pubg from './assets/img/pubg.jpg';
+
 let CardTypes = [
 	{ name: "vue", image: vue },
 	{ name: "express", image: express },
@@ -43,11 +46,13 @@ let CardTypes = [
 	{ name: "nodejs", image: nodejs },
 	{ name: "webpack", image: webpack},
 	{ name: "babel", image: babel },
-	{ name: "jade", image: jade },
   { name: "css", image: css },
   { name: "html", image: html },
+  { name: "switchGame", image: switchGame },
+  { name: "psGame", image: psGame },
+  { name: "pubg", image: pubg },
 ];
-let shuffleCards = () => {
+let shuffleCards = () => { //亂數排序
 	let cards = [].concat(_.cloneDeep(CardTypes), _.cloneDeep(CardTypes));
 	return _.shuffle(cards);
 }
@@ -66,7 +71,9 @@ export default {
       flipBackTimer: null,
       timer: null,
       time: "--:--",
-      score: 0
+      scoreA: 0,
+      scoreB: 0,
+      user: 'A'
     }
 	},
 	
@@ -75,7 +82,9 @@ export default {
 			this.showSplash = false;
 			let cards = shuffleCards();
 			this.turns = 0;
-			this.score = 0;
+			this.scoreA = 0;
+      this.scoreB = 0;
+      this.user = 'A';
 			this.started = false;
 			this.startTime = 0;
 			
@@ -92,10 +101,20 @@ export default {
 		},
 		
 		sameFlippedCard() { // 翻開是一樣的
+    console.log('user', this.user)
 			let flippedCards = this.flippedCards();
 			if (flippedCards.length == 2) {
 				if (flippedCards[0].name == flippedCards[1].name){
-          this.score = this.score + 1;
+          switch (this.user) {
+            case 'A':
+              return this.scoreA = this.scoreA + 1;
+              break;
+            case 'B':
+              return this.scoreB = this.scoreB + 1;
+              break;
+            default:
+              break;
+          }
 					return true;
         }
 			}
@@ -114,29 +133,13 @@ export default {
 				return true;
 		},
 		
-		startGame() {
-			this.started = true;
-			this.startTime = moment();
-			
-			this.timer = setInterval(() => {
-				this.time = moment(moment().diff(this.startTime)).format("mm:ss");
-			}, 1000);
-		},
-		
 		finishGame() {
 			this.started = false;
-			clearInterval(this.timer);
-			let score = 1000 - (moment().diff(this.startTime, 'seconds') - CardTypes.length * 5) * 3 - (this.turns - CardTypes.length) * 5;
-			this.score = Math.max(score, 0);
 			this.showSplash = true;
 		},
 		
 		flipCard(card) {
 			if (card.found || card.flipped) return;
-			
-			if (!this.started) {
-				this.startGame();
-			}
 			
 			let flipCount = this.flippedCards().length;
 			
@@ -160,6 +163,7 @@ export default {
 				} else {
 					// Wrong match
 					this.flipBackTimer = setTimeout( ()=> {
+            this.user = this.user === 'A' ? 'B' : 'A';
 						this.clearFlipBackTimer();
 						this.clearFlips();
 					}, 1000);
@@ -221,10 +225,8 @@ html {
 	margin: 2em;
 }
 
-
-
 .cards {
-  width: 1300px;
+  width: 1080px;
   margin: 0 auto;
 	.card {
 		position: relative;
@@ -252,7 +254,7 @@ html {
 		
 		.back {
 			background-image: url('https://p2.bahamut.com.tw/B/2KU/46/0000377946.JPG');
-			background-size: 90%;
+			background-size: 95%;
 			background-position: center;
 			background-repeat: no-repeat;
 			
