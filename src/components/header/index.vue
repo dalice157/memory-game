@@ -1,14 +1,18 @@
 <template>
-  <div class="info">
-    <div class="label">
-      <span class="title">ScoreA：</span>
-      <span class="value">{{ scoreA }}</span>
+  <div class="wrap">
+    <div class="info">
+      <div class="label">
+        <span class="title">Score-A：</span>
+        <span class="value">{{ scoreA }}</span>
+      </div>
+      <div class="label">
+        <span class="title">Score-B：</span>
+        <span class="value">{{ scoreB }}</span>
+      </div>
     </div>
-    <div class="label">
-      <span class="title">ScoreB：</span>
-      <span class="value">{{ scoreB }}</span>
+    <div class="btnWrap">
+      <button class="btn" @click="resetGame()">重新開始</button>
     </div>
-    <button class="btn" @click="resetGame()">重新開始</button>
   </div>
 </template>
 
@@ -19,6 +23,4 @@ export default {
 }
 </script>
 
-<style src="./header.scss" lang="scss" scoped>
-
-</style>
+<style src="./header.scss" lang="scss" scoped></style>

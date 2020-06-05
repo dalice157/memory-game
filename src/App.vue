@@ -182,40 +182,21 @@ export default {
 </script>
 
 <style lang="scss">
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900|Dosis:300,400,600,700,800|Droid+Sans:400,700|Lato:300,400,700,900|PT+Sans:400,700|Ubuntu:300,400,500,700|Open+Sans:400,300,600,700|Roboto:400,300,500,700,900|Roboto+Condensed:400,300,700|Open+Sans+Condensed:300,700|Work+Sans:400,300,700|Play:400,700|Maven+Pro:400,500,700,900&subset=latin,latin-ext);
-				
-$backgroundColor: #292C33;
-$white: White;
-$masterColor: #389BFE;
+@import './scss/_var.scss';
 
 * {
-  box-sizing: border-box;  
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   background-color: $backgroundColor;
 	color: $white;
 	font-size: 16px;
-	font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+	font-family: 'Helvetica', 'Arial', sans-serif;
 	font-weight: 400;
 	font-smoothing: antialiased;
-	-webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;	
-}
-
-@mixin clearfix() {
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-  &:after {
-      clear: both;
-  }
-}
-
-.wrap {
-	margin: 2em;
 }
 
 .cards {
@@ -277,7 +258,7 @@ html {
 		}
 	}
 	
-} // .cards
+}
 
 
 </style>
