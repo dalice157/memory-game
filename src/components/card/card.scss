@@ -1,4 +1,5 @@
 @import '../../scss/var';
+// vue transition start
 .flippe-enter-active, .flippe-leave-active {
   transition: opacity .5s;
 }
@@ -12,7 +13,7 @@
 				transform: rotateY(0deg);
 			}
 }
-
+// vue transition end
 .cards {
   width: 60%;
   margin: 0 auto;

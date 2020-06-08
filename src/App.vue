@@ -191,6 +191,7 @@ html {
   height: 100%;
 }
 
+// vue transition start
 .fade-enter-active, .fade-leave-active {
   transition: all .6s ease-out;
 }
@@ -198,5 +199,5 @@ html {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
-
+// vue transition end
 </style>
