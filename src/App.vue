@@ -9,11 +9,13 @@
       :cards="cards"
       :flipCard="flipCard"
     />
-    <Lightbox 
-      :user="user" 
-      :closeBox="closeBox" 
-      v-if="show" 
-    />
+    <transition name="fade">
+      <Lightbox 
+        :user="user" 
+        :closeBox="closeBox" 
+        v-if="show" 
+      />
+    </transition>
   </div>
 </template>
 
@@ -22,18 +24,12 @@ import _ from 'lodash';
 import Header from './components/header';
 import Card from './components/card';
 import Lightbox from './components/lightbox';
-// import vue from './assets/img/vue.png';
-import express from './assets/img/express.png';
-import mongo from './assets/img/mongodb.png';
-import webpack from './assets/img/webpack.png';
-import babel from './assets/img/babel.png';
+import vue from './assets/img/vue.png';
 import css from './assets/img/css.png';
 import html from './assets/img/html.png';
-import nodejs from './assets/img/nodejs.png';
 import switchGame from './assets/img/switchGame.png';
 import psGame from './assets/img/psGame.png';
 import pubg from './assets/img/pubg.jpg';
-const vue = require(`./assets/img/vue.png`);
 
 let CardTypes = [
 	{ name: "vue", image: vue },
@@ -193,6 +189,14 @@ html {
 
 .wrap {
   height: 100%;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .6s ease-out;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 </style>

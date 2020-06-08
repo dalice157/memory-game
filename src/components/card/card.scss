@@ -1,7 +1,20 @@
 @import '../../scss/var';
+.flippe-enter-active, .flippe-leave-active {
+  transition: opacity .5s;
+}
+
+.flippe-enter, .flippe-leave-to {
+  .back {
+				transform: rotateY(180deg);
+			}
+			
+			.front {
+				transform: rotateY(0deg);
+			}
+}
 
 .cards {
-  width: 90%;
+  width: 60%;
   margin: 0 auto;
 	.card {
 		position: relative;
