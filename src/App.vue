@@ -183,6 +183,9 @@ export default {
   margin: 0;
   padding: 0;
 }
+html, body {
+  min-height: 100%;
+}
 
 html {
   background-color: $backgroundColor;
@@ -191,6 +194,10 @@ html {
 	font-family: 'Helvetica', 'Arial', sans-serif;
 	font-weight: 400;
 	font-smoothing: antialiased;
+}
+
+.wrap {
+  height: 100%;
 }
 
 </style>

@@ -1,24 +1,28 @@
 @import '../../scss/var';
 
 .box {
-	position: absolute;
-	left: 0; right: 0; top: 0; bottom: 0;
-	
+	top: -100%;
+	width: 100%;
+  overflow: hidden;
+  transition: opacity .5s ease-in-out;
 	.overlay {
-		position: absolute;
+		position: fixed;
 		left: 0; right: 0; top: 0; bottom: 0;
 		height: 100%;
 		background-color: rgba(#000, 0.6);
 	}
 	
 	.content {
+		margin: auto;
 		position: absolute;
-		left: 0; right: 0; top: 0; bottom: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 
 		width: 400px;
 		height: 200px;
-		
-		margin: auto;
+
 		text-align: center;
 		
 		background-color: rgba(#333, 0.9);
@@ -27,6 +31,7 @@
 		box-shadow: 5px 5px 20px rgba(Black, 0.8);
 		
 		padding: 1em;
+    
 		
 		.title {
 			font-size: 1.8em;
@@ -50,4 +55,20 @@
 			
 		}
 	}
+}
+
+@media only screen and (min-width: 321px) and (max-width: 768px) {
+  .box {
+    .content {
+      width: 90%;
+    }
+  }
+} 
+
+@media only screen and (max-width: 321px) {
+  .box {
+    .content {
+      width: 90%;
+    }
+  }
 }
