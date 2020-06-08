@@ -37,11 +37,6 @@ const vue = require(`./assets/img/vue.png`);
 
 let CardTypes = [
 	{ name: "vue", image: vue },
-	{ name: "express", image: express },
-	{ name: "mongo", image: mongo },
-	{ name: "nodejs", image: nodejs },
-	{ name: "webpack", image: webpack},
-	{ name: "babel", image: babel },
   { name: "css", image: css },
   { name: "html", image: html },
   { name: "switchGame", image: switchGame },
