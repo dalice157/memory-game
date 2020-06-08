@@ -31,19 +31,6 @@ import switchGame from './assets/img/switchGame.png';
 import psGame from './assets/img/psGame.png';
 import pubg from './assets/img/pubg.jpg';
 
-let CardTypes = [
-	{ name: "vue", image: vue },
-  { name: "css", image: css },
-  { name: "html", image: html },
-  { name: "switchGame", image: switchGame },
-  { name: "psGame", image: psGame },
-  { name: "pubg", image: pubg },
-];
-
-let shuffleCards = () => { //亂數排序
-	let cards = [].concat(_.cloneDeep(CardTypes), _.cloneDeep(CardTypes));
-	return _.shuffle(cards);
-}
 
 export default {
   name: 'App',
@@ -59,14 +46,26 @@ export default {
       flipBackTimer: null,
       scoreA: 0,
       scoreB: 0,
-      user: 'A'
+      user: 'A',
+      CardTypes: [
+        { name: "vue", image: vue },
+        { name: "css", image: css },
+        { name: "html", image: html },
+        { name: "switchGame", image: switchGame },
+        { name: "psGame", image: psGame },
+        { name: "pubg", image: pubg },
+      ]
     }
 	},
 	
 	methods: {
+    shuffleCards() {//亂數排序
+      let cards = [].concat(_.cloneDeep(this.CardTypes), _.cloneDeep(this.CardTypes));
+      return _.shuffle(cards);
+    },
 		resetGame() {
 			this.show = false;
-			let cards = shuffleCards();
+			let cards = this.shuffleCards();
 			this.scoreA = 0;
       this.scoreB = 0;
       this.user = 'A';
@@ -139,7 +138,7 @@ export default {
 						}
 					}, 200);
 				} else {
-					// 猜錯
+					// 猜錯並出現換另一方的lightbox
 					this.flipBackTimer = setTimeout( ()=> {
             this.user = this.user === 'A' ? 'B' : 'A';
             this.show = true;
