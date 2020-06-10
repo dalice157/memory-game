@@ -159,7 +159,7 @@ export default {
 		}
 	},
 	
-	created() {
+	beforeMount() {
 		this.resetGame();
 	}
 }
@@ -192,7 +192,7 @@ html {
 
 // vue transition start
 .fade-enter-active, .fade-leave-active {
-  transition: all .6s ease-out;
+  transition: all .5s ease-out;
 }
 
 .fade-enter, .fade-leave-to {
