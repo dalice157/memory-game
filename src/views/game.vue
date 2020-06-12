@@ -165,5 +165,6 @@ export default {
 <style lang="scss" scoped>
 .wrap {
   height: 100%;
+  margin-top: -20px;
 }
 </style>
