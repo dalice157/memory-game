@@ -33,7 +33,7 @@
   transition: opacity .5s;
 }
 
-.flippe-enter, .flippe-leave-to {
+.flippe-enter, .flippe-leave {
   .back {
 				transform: rotateY(180deg);
 			}
