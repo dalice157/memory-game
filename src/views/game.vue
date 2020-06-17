@@ -7,7 +7,7 @@
     />
     <Card 
       :cards="cards"
-      :flipCard="flipCard"
+      v-on:flipCard="flipCard"
     />
     <transition name="fade">
       <Lightbox 

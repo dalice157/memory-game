@@ -5,7 +5,7 @@ import Game from '../views/game.vue';
 
 Vue.use(VueRouter);
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',

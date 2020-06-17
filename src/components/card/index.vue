@@ -9,7 +9,7 @@
       v-for="(card, i) in cards" 
       :key="i" 
       :class="{ flipped: card.flipped, found: card.found }" 
-      @click="flipCard(card)"
+      @click="$emit('flipCard', card)"
     >
     <div class="back"></div>
     <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>

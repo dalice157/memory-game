@@ -79,6 +79,7 @@ export default {
 	background: #931f2b;
 	border: 1px solid #931f2b;
 	background-image: linear-gradient(top, #931f2b, #5e0b13);
+  cursor: pointer;
 
 	border-radius:5px;
 	box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #613035, 0 4px 2px rgba(0, 0, 0, .5);
