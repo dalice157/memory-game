@@ -1,6 +1,6 @@
 module.exports = {
   // 基本路徑
-  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/memory-game/' : './',
   // 輸出檔案目錄
   outputDir: 'dist',
   assetsDir: 'assets', // 靜態資源目錄 (js, css, img, fonts)
