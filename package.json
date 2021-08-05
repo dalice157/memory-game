@@ -1,6 +1,7 @@
 {
   "name": "memory-game",
   "version": "0.1.0",
+  "homepage": "http://dalice157.github.io/memory-game",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",

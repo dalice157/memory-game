@@ -20,9 +20,6 @@
         console.log(this.message)
       }
     },
-    beforeCreate: function(){
-      console.log("beforeCreate data資料： "+this.$data.message)
-    },
     created: function(){
       console.log("created data資料： "+this.$data.message)
     },

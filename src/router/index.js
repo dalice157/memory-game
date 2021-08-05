@@ -4,7 +4,7 @@ import Home from '../views/home.vue';
 import Game from '../views/game.vue';
 
 Vue.use(VueRouter);
-
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 const routes = [
   {
     path: '/',
