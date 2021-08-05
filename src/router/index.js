@@ -7,12 +7,12 @@ Vue.use(VueRouter);
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 const routes = [
   {
-    path: '/',
+    path: process.env.NODE_ENV === 'production' ? '/memory-game/' : '/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/game',
+    path: process.env.NODE_ENV === 'production' ? '/memory-game/game' : '/game',
     name: 'Game',
     component: Game
   }
